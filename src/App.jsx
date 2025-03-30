@@ -1,9 +1,10 @@
 import "./App.css";
+import Header from "./omponents/Header/Header";
 
 function App() {
   return (
     <>
-      <h1>Test</h1>
+      <Header />
     </>
   );
 }
