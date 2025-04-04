@@ -6,6 +6,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { IoSearchSharp } from "react-icons/io5";
 import { PiShoppingCartBold } from "react-icons/pi";
 import LowerHeader from "./LowerHeader";
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div>
@@ -14,9 +15,9 @@ const Header = () => {
           <div className={classes.header_container}>
             <div className={classes.logo_container}>
               {/* Logo */}
-              <a href="/">
+              <Link to="/">
                 <img src={amazonLogo} alt="amazon logo" />
-              </a>
+              </Link>
               <div className={classes.delivery}>
                 {/* location icon */}
                 <span>
@@ -45,19 +46,19 @@ const Header = () => {
               </div>
 
               {/* sign in part */}
-              <a href="/">
+              <Link to="/auht">
                 <div>
                   <p>Sing In</p>
                   <span>Account & Lists</span>
                 </div>
-              </a>
+              </Link>
               {/* return order part */}
-              <a href="">
+              <Link to="/orders">
                 <p>return</p>
                 <span>& Orders</span>
-              </a>
+              </Link>
               {/* cart part */}
-              <a href="" className={classes.cart}>
+              <a href="/cart" className={classes.cart}>
                 {/* cart icon */}
                 <PiShoppingCartBold size={35} />
                 <span>0</span>
