@@ -7,13 +7,13 @@ const catagories = [
   },
   {
     id: 2,
-    name: "women's fashion",
+    name: "women's clothing",
     title: "Discover fashion trends",
     img_url: "../../../public/catagory-images/images/women's-fashion2.jpg",
   },
   {
     id: 3,
-    name: "men's fashion",
+    name: "men's clothing",
     title: "Men's Clothing",
     img_url: "../../../public/catagory-images/images/men's-fashion2.jpg",
   },

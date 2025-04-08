@@ -1,0 +1,55 @@
+.outer_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  justify-items: center;
+  max-width: 1450px;
+  gap: 50px;
+  margin: 100px auto;
+}
+
+.inner_container {
+  position: relative;
+  width: 220px;
+  height: 450px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.resultCard_img {
+  width: 80%;
+  height: 250px;
+  object-fit: center;
+  padding: 0 20px;
+  margin-bottom: 5px;
+}
+
+.resultCard_rating {
+  display: flex;
+  column-gap: 7px;
+  align-items: center;
+  padding: 10px 5px;
+}
+
+button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0 auto 5px 3px;
+  width: 97%;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: var(--primary-color);
+  cursor: pointer;
+  border: none;
+  display: none;
+}
+
+button:hover {
+  background-color: var(--primary-shade);
+}
+
+.inner_container:hover button {
+  display: block;
+}

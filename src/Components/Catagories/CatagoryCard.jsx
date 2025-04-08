@@ -1,17 +1,18 @@
 import React from "react";
 import classes from "./catagories.module.css";
+import { Link } from "react-router-dom";
 
 const CatagoryCard = ({ data, index }) => {
   return (
     <>
       <div className={classes.inner_container} key={index}>
-        <a href="">
+        <Link to={`/category/${data.name}`}>
           <span>
             <h2>{data.title}</h2>
           </span>
           <img src={data.img_url} alt={data.name} />
           <p>shop now</p>
-        </a>
+        </Link>
       </div>
     </>
   );
