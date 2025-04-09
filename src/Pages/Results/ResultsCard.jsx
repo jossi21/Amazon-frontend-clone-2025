@@ -1,6 +1,7 @@
 import React from "react";
 import { Rating } from "@mui/material";
 import classes from "./results.module.css";
+import CurrencyFormat from "../../Components/CurrencyFormat/CurrencyFormat";
 
 const ResultsCard = ({ singleItem }) => {
   return (
@@ -12,6 +13,9 @@ const ResultsCard = ({ singleItem }) => {
           <div className={classes.resultCard_rating}>
             <Rating value={singleItem.rating.rate} precision={0.1} />
             <small>{singleItem.rating.count}</small>
+          </div>
+          <div>
+            <CurrencyFormat amount={singleItem.price} />
           </div>
         </div>
         <button>Add to cart</button>
