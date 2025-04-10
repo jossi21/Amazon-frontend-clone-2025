@@ -8,7 +8,7 @@ const Catagory = () => {
     <>
       <section className={classes.outer_container}>
         {Catagories?.map((singleItem, id) => {
-          return <CatagoryCard data={singleItem} index={id} />;
+          return <CatagoryCard data={singleItem} key={id} />;
         })}
       </section>
     </>

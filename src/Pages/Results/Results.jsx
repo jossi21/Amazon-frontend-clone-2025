@@ -13,7 +13,7 @@ const Results = () => {
 
   useEffect(() => {
     axios
-      .get(`${base_url}/category/${categoryName}`)
+      .get(`${base_url}/products/category/${categoryName}`)
       .then((res) => {
         setProduct(res.data);
         // console.log(res.data);
@@ -32,12 +32,7 @@ const Results = () => {
           <hr />
           <div className={classes.outer_container}>
             {product?.map((singleProduct, id) => {
-              return (
-                <ResultsCard
-                  key={singleProduct.id}
-                  singleItem={singleProduct}
-                />
-              );
+              return <ResultsCard key={id} singleItem={singleProduct} />;
             })}
           </div>
         </section>
