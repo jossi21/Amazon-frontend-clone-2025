@@ -29,7 +29,15 @@ const ProductDetail = () => {
   }, []);
   return (
     <LayOut>
-      {isLoading ? <Loading /> : <ProductCard singleItem={product} />}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ProductCard
+          singleItem={product}
+          flex={true}
+          renderDescription={true}
+        />
+      )}
     </LayOut>
   );
 };
