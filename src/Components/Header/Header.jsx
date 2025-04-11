@@ -7,7 +7,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { PiShoppingCartBold } from "react-icons/pi";
 import LowerHeader from "./LowerHeader";
 import { Link } from "react-router-dom";
-import { DataContext } from "../../Pages/DataProvider/DataPovider";
+import { DataContext } from "../../Components/DataProvider/DataPovider";
 const Header = () => {
   const [{ cart }, dispatch] = useContext(DataContext);
   // console.log(cart.length);

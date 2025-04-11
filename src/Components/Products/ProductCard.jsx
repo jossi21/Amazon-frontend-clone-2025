@@ -4,7 +4,7 @@ import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
 import { ListItem, Rating } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { DataContext } from "../../Pages/DataProvider/DataPovider";
+import { DataContext } from "../../Components/DataProvider/DataPovider";
 import { Type } from "../../Utility/action.type";
 
 const ProductCard = ({ singleItem, flex, renderDescription }) => {

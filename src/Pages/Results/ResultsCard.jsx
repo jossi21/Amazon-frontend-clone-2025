@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Rating } from "@mui/material";
 import classes from "./results.module.css";
 import CurrencyFormat from "../../Components/CurrencyFormat/CurrencyFormat";
-import { DataContext } from "../DataProvider/DataPovider";
+import { DataContext } from "../../Components/DataProvider/DataPovider";
 import { Type } from "../../Utility/action.type";
 
 const ResultsCard = ({ singleItem }) => {
