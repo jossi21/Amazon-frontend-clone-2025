@@ -2,7 +2,11 @@
   margin: 0;
   padding: 0;
 }
-
+.fixed_header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
 .header_container {
   background-color: black;
   display: flex;

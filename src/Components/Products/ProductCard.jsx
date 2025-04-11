@@ -1,11 +1,33 @@
 import React from "react";
 import classes from "./product.module.css";
 import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
-import { Rating } from "@mui/material";
+import { ListItem, Rating } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { DataContext } from "../../Pages/DataProvider/DataPovider";
+import { Type } from "../../Utility/action.type";
 
 const ProductCard = ({ singleItem, flex, renderDescription }) => {
   const { image, title, id, category, price, rating, description } = singleItem;
+
+  const [state, dispatch] = useContext(DataContext);
+
+  // console.log(state);
+
+  const addToCart = () => {
+    dispatch({
+      type: Type.ADD_TO_CART,
+      item: {
+        image,
+        title,
+        id,
+        category,
+        price,
+        rating,
+        description,
+      },
+    });
+  };
   return (
     <>
       <div
@@ -19,7 +41,13 @@ const ProductCard = ({ singleItem, flex, renderDescription }) => {
         <div>
           <h4>{title}</h4>
           {renderDescription ? (
-            <div style={{ maxWidth: "650px", marginTop: "10px" }}>
+            <div
+              style={{
+                maxWidth: "650px",
+                marginTop: "10px",
+                paddingRight: "9px",
+              }}
+            >
               {description}
             </div>
           ) : (
@@ -32,7 +60,11 @@ const ProductCard = ({ singleItem, flex, renderDescription }) => {
           <div>
             <CurrencyFormat amount={price} />
           </div>
-          <button className={classes.addCart_button} type="submit">
+          <button
+            className={classes.addCart_button}
+            type="submit"
+            onClick={addToCart}
+          >
             Add to cart
           </button>
         </div>

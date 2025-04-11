@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./header.module.css";
 import amazonLogo from "../../assets/Images/amazon_PNG11.png";
 import americaFlag from "../../assets/Images/america fleg.jpg";
@@ -7,10 +7,13 @@ import { IoSearchSharp } from "react-icons/io5";
 import { PiShoppingCartBold } from "react-icons/pi";
 import LowerHeader from "./LowerHeader";
 import { Link } from "react-router-dom";
+import { DataContext } from "../../Pages/DataProvider/DataPovider";
 const Header = () => {
+  const [{ cart }, dispatch] = useContext(DataContext);
+  // console.log(cart.length);
   return (
-    <div>
-      <>
+    <>
+      <section className={classes.fixed_header}>
         <section>
           <div className={classes.header_container}>
             <div className={classes.logo_container}>
@@ -61,14 +64,14 @@ const Header = () => {
               <a href="/cart" className={classes.cart}>
                 {/* cart icon */}
                 <PiShoppingCartBold size={35} />
-                <span>0</span>
+                <span>{cart.length}</span>
               </a>
             </div>
           </div>
         </section>
         <LowerHeader />
-      </>
-    </div>
+      </section>
+    </>
   );
 };
 

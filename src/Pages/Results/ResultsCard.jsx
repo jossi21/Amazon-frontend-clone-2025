@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Rating } from "@mui/material";
 import classes from "./results.module.css";
 import CurrencyFormat from "../../Components/CurrencyFormat/CurrencyFormat";
+import { DataContext } from "../DataProvider/DataPovider";
+import { Type } from "../../Utility/action.type";
 
 const ResultsCard = ({ singleItem }) => {
+  const [state, dispatch] = useContext(DataContext);
+
+  const addToCart = () => {
+    dispatch({
+      type: Type.ADD_TO_CART,
+      item: singleItem,
+    });
+  };
   return (
     <>
       <div className={classes.inner_container}>
@@ -18,7 +28,7 @@ const ResultsCard = ({ singleItem }) => {
             <CurrencyFormat amount={singleItem.price} />
           </div>
         </div>
-        <button>Add to cart</button>
+        <button onClick={addToCart}>Add to cart</button>
       </div>
     </>
   );

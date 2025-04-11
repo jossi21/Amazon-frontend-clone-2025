@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 import classes from "./product.module.css";
 import Loading from "../Loading/Loading";
-// import { base_url } from "../../API/Api";
 
 const Products = () => {
   const [product, setProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
     setIsLoading(true);
     axios
