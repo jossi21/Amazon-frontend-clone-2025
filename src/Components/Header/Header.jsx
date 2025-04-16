@@ -11,6 +11,9 @@ import { DataContext } from "../../Components/DataProvider/DataPovider";
 const Header = () => {
   const [{ cart }, dispatch] = useContext(DataContext);
   // console.log(cart.length);
+  const totalPurchaseItem = cart?.reduce((amount, item) => {
+    return item.amount + amount;
+  }, 0);
   return (
     <>
       <section className={classes.fixed_header}>
@@ -61,11 +64,11 @@ const Header = () => {
                 <span>& Orders</span>
               </Link>
               {/* cart part */}
-              <a href="/cart" className={classes.cart}>
+              <Link to="/cart" className={classes.cart}>
                 {/* cart icon */}
                 <PiShoppingCartBold size={35} />
-                <span>{cart.length}</span>
-              </a>
+                <span>{totalPurchaseItem}</span>
+              </Link>
             </div>
           </div>
         </section>

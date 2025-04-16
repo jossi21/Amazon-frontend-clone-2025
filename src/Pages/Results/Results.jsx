@@ -40,7 +40,13 @@ const Results = () => {
           ) : (
             <div className={classes.outer_container}>
               {product?.map((singleProduct, id) => {
-                return <ResultsCard key={id} singleItem={singleProduct} />;
+                return (
+                  <ResultsCard
+                    key={id}
+                    singleItem={singleProduct}
+                    renderAdd={true}
+                  />
+                );
               })}
             </div>
           )}
