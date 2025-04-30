@@ -8,8 +8,10 @@ import { PiShoppingCartBold } from "react-icons/pi";
 import LowerHeader from "./LowerHeader";
 import { Link } from "react-router-dom";
 import { DataContext } from "../../Components/DataProvider/DataPovider";
+import { auth } from "../../Utility/firebase";
+
 const Header = () => {
-  const [{ cart }, dispatch] = useContext(DataContext);
+  const [{ user, cart }, dispatch] = useContext(DataContext);
   // console.log(cart.length);
   const totalPurchaseItem = cart?.reduce((amount, item) => {
     return item.amount + amount;
@@ -41,7 +43,7 @@ const Header = () => {
               </select>
               <input type="text" name="" id="" placeholder="search product" />
               {/* search icon */}
-              <IoSearchSharp size={25} />
+              <IoSearchSharp size={38} />
             </div>
             <div className={classes.right_container}>
               <div className={classes.flag_container}>
@@ -52,10 +54,24 @@ const Header = () => {
               </div>
 
               {/* sign in part */}
-              <Link to="/auht">
+              <Link to={!user && "/auht"}>
                 <div>
-                  <p>Sing In</p>
-                  <span>Account & Lists</span>
+                  {user ? (
+                    <>
+                      <p>Hello, {user?.email?.split("@")[0]}</p>
+                      <span
+                        style={{ paddingLeft: "9px" }}
+                        onClick={() => auth.signOut()}
+                      >
+                        Sign out
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <p>Hello, Sing In</p>
+                      <span>Account & Lists</span>
+                    </>
+                  )}
                 </div>
               </Link>
               {/* return order part */}

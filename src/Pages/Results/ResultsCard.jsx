@@ -28,7 +28,9 @@ const ResultsCard = ({ singleItem }) => {
             <CurrencyFormat amount={singleItem.price} />
           </div>
         </div>
-        <button onClick={addToCart}>Add to cart</button>
+        <button className={classes.result_button} onClick={addToCart}>
+          Add to cart
+        </button>
       </div>
     </>
   );
