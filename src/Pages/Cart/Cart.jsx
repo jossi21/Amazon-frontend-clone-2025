@@ -11,7 +11,7 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 
 const Cart = () => {
   const [{ cart, user }, dispatch] = useContext(DataContext);
-  const total = cart.reduce((amount, item) => {
+  const total = cart?.reduce((amount, item) => {
     return item.price * item.amount + amount;
   }, 0);
 
