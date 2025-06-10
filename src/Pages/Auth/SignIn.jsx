@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import logo from "../../assets/Images/amzon-auth-logo.png";
 import classes from "./auth.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../../Utility/firebase";
 import {
   signInWithEmailAndPassword,
@@ -24,6 +24,8 @@ const Auth = () => {
 
   const [{ user }, dispatch] = useContext(DataContext);
   const navigate = useNavigate();
+  const navStateData = useLocation();
+  // console.log(navStateData);
   // console.log(user);
   const authHandler = async (e) => {
     try {
@@ -39,7 +41,7 @@ const Auth = () => {
               user: userInfo.user,
             });
             setLoading({ ...loading, signIn: false });
-            navigate("/");
+            navigate(navStateData?.state?.redirect || "/");
           })
           .catch((err) => {
             // console.log("I couldn't signIn with this email and password");
@@ -56,7 +58,7 @@ const Auth = () => {
               user: userInfo.user,
             });
             setLoading({ ...loading, signUp: false });
-            navigate("/");
+            navigate(navStateData?.state?.redirect || "/");
           })
           .catch((err) => {
             // console.log(
@@ -78,6 +80,18 @@ const Auth = () => {
       </Link>
       <div className={classes.form_container}>
         <h1>Sign In</h1>
+        {navStateData?.state?.msg && (
+          <small
+            style={{
+              color: "red",
+              fontWeight: "bold",
+              textAlign: "center",
+              padding: "5px",
+            }}
+          >
+            {navStateData?.state?.msg}
+          </small>
+        )}
         <form action="">
           <label htmlFor="Email">E-mail:</label>
           <input

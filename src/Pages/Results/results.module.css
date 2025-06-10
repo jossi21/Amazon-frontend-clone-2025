@@ -55,7 +55,7 @@ p {
   display: none;
 }
 
-button:hover {
+.result_button:hover {
   background-color: var(--primary-shade);
 }
 

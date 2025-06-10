@@ -5,17 +5,25 @@ import { DataContext } from "../../Components/DataProvider/DataPovider";
 import ProductCard from "../../Components/Products/ProductCard";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import CurrencyFormat from "../../Components/CurrencyFormat/CurrencyFormat";
+import { axiosInstant } from "../../API/axios";
+import { ClipLoader } from "react-spinners";
+import { db } from "../../Utility/firebase";
+import { useNavigate } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
+
 const Payment = () => {
   const [{ user, cart }, dispatch] = useContext(DataContext);
 
   const [cardError, setCardError] = useState("");
+  const [processing, setProcessing] = useState(false);
 
   const totalPurchaseItem = cart?.reduce((amount, item) => {
     return item.amount + amount;
   }, 0);
 
   const stripe = useStripe();
-  const element = useElements();
+  const elements = useElements();
+  const navigate = useNavigate();
 
   const cardIssueHandler = (e) => {
     console.log(e);
@@ -25,6 +33,48 @@ const Payment = () => {
   const total = cart?.reduce((amount, item) => {
     return item.price * item.amount + amount;
   }, 0);
+
+  // the function tha handle the payment of goods
+  // that have  three  basic steps
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setProcessing(true);
+      // 1 Contacting the backend function to get the client secret
+      const response = await axiosInstant({
+        method: "post",
+        url: `/payment/create?total=${total * 100}`,
+      });
+      // console.log(response.data);
+      const clientSecret = response.data?.clientSecret;
+
+      // 2 client side conformation
+
+      const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
+      });
+
+      // console.log(paymentIntent);
+
+      // 3 put the data in the database to use different function and clear the cart
+
+      const orderRef = doc(db, "users", user.uid, "orders", paymentIntent.id);
+
+      await setDoc(orderRef, {
+        cart: cart,
+        amount: paymentIntent.amount,
+        created: paymentIntent.created,
+      });
+
+      setProcessing(false);
+      navigate("/orders", { state: { msg: "You have new order" } });
+    } catch (error) {
+      console.log(error);
+      setProcessing(false);
+    }
+  };
 
   return (
     <LayOut>
@@ -37,7 +87,7 @@ const Payment = () => {
         <div className={classes.flex}>
           <h3>Delivery Address</h3>
           <div>
-            <div>{user.email}</div>
+            <div>{user?.email}</div>
             <div>4kilo, Arada</div>
             <div>Addis Ababa, Ethiopia</div>
           </div>
@@ -59,7 +109,7 @@ const Payment = () => {
           <div className={classes.payment_card_container}>
             <div>
               {/* card element */}
-              <form action="">
+              <form onSubmit={handleSubmit}>
                 <CardElement onChange={cardIssueHandler} />
                 <div>
                   <div>
@@ -80,7 +130,14 @@ const Payment = () => {
                   </div>
                 </div>
                 <button className={classes.payment_button} type="submit">
-                  pay now
+                  {processing ? (
+                    <div className={classes.loading}>
+                      <ClipLoader size={12} />
+                      <p>Please wait ...</p>
+                    </div>
+                  ) : (
+                    "pay now"
+                  )}
                 </button>
               </form>
             </div>
