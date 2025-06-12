@@ -1,0 +1,26 @@
+.order__container {
+  background-color: rgb(234, 237, 241);
+  padding: 30px;
+}
+
+.order__div {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.order__div h2 {
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 10px;
+}
+
+.order__div p {
+  padding: 10px;
+}
+
+.order__div img {
+  width: 100px !important;
+}
+.order__div div {
+  height: auto !important;
+}

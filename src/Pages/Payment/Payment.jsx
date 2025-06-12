@@ -10,6 +10,7 @@ import { ClipLoader } from "react-spinners";
 import { db } from "../../Utility/firebase";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
+import { Type } from "../../Utility/action.type";
 
 const Payment = () => {
   const [{ user, cart }, dispatch] = useContext(DataContext);
@@ -67,6 +68,8 @@ const Payment = () => {
         amount: paymentIntent.amount,
         created: paymentIntent.created,
       });
+
+      dispatch({ type: Type.EMPTY_CART });
 
       setProcessing(false);
       navigate("/orders", { state: { msg: "You have new order" } });

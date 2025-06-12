@@ -8,7 +8,7 @@ const ProtectedRout = ({ children, msg, redirect }) => {
 
   useEffect(() => {
     if (!user) {
-      navigate("/auth", { state: { msg, redirect } });
+      navigate("/auht", { state: { msg, redirect } });
     }
   }, [user]);
   return children;
